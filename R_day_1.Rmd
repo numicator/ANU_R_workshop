@@ -1,0 +1,1163 @@
+---
+title: "<div class='row'><div class='column left'>Introduction to R and RStudio<br>Day 1<br><span style='font-family:Verdana;font-size:50%'>RSB-CBBU Workshop for Students and Staff<br> https://github.com/numicator/ANU_R_workshop</span></div><div class='column right'>![](anu_logo.png)</div></div>"
+
+author: "Marcin Adamski"
+date: "26-27 November 2019"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 4
+keep_tex: no
+---
+
+---
+<style type="text/css">
+.column {
+  float: left;
+}
+.left {
+}
+.right {
+  width: 150px;
+  float: right;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.table{
+  width: 60%;
+  margin-left: 20%; 
+  margin-right: 20%;
+}
+.table th{
+  text-align: left;
+  background: lightgrey;
+}
+
+tbody th{
+  padding: 5px;
+  text-align: center;
+  background: lightgrey;
+  color: black
+}
+tbody td{
+  padding: 5px;
+  text-align: left;
+  background: white;
+  color: black
+}
+
+blockquote:before{
+  display: block;
+  position:relative;
+  left: -0.55em;
+  top: -0.3em;
+  height: 0px;
+  content: "!";
+  font-size: 2em;
+  color: #a00;
+}
+blockquote{
+  border-bottom: 1px solid #ccc;
+  border-left: 10px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5em 0.5em;
+  font-size: 1em;
+}
+ul{
+  padding-left:1.25em;
+}
+ol{
+  padding-left:1.25em;
+}
+#TOC:before{
+  font-size: 1.5em;
+  padding-left: 0.25em;
+  content: "Contents";
+}
+#TOC{
+  border: 2px solid #b0d0d0;
+  padding: 1em 0.25em;
+  border-radius: 5px
+}
+
+.footer{
+  text-align: center;
+  font-size: 150%;
+}
+.footer img{
+  height: 1em;
+}
+.slides{
+  color: darkred;
+  background: #e8f8f8;
+  padding: 0.4em 1em;
+  border: 2px solid #b0d0d0;
+  border-radius: 5px
+}
+</style>
+
+<div style="border: 2px solid #b0d0d0; background-color: #e8f8f8; padding: 1em 0.25em; border-radius: 5px">
+This document was created in R Markdown (http://rmarkdown.rstudio.com, http://rmarkdown.rstudio.com/articles_intro.html). R Markdown documents can be easily created in RStudio.</div>
+
+# Learning Objectives for Day 1
+
+* Morning Session:
+    * Getting familiar with RStudio
+        * Panels in RStudio IDE (Integrated Development Environment)
+        * Concept of RStudio Project and creating a new one
+        * Create New script file
+        * Running script line-by-line
+    * Proper commenting of the code
+    * Using R as calculator
+    * Getting Help
+    * Variable and data types
+      * naming variables
+      * listing and removing variables
+    * Logical Operators
+    * Homogenous Data Structures
+      * Creating and working with vectors
+      * Creating and working with matrices
+    * Heterogeneous Data Structures
+      * Lists
+      * Data frames
+* Afternoon Session:
+    * Reading and writing data files
+    * Sub-setting data frames - getting specific rows and columns
+    * Summarizing and filtering the data
+    * Making plots
+  
+# R functions used today
+<div style="border: 2px solid #b0d0d0; background-color: #e8f8f8; padding: 1em 0px; border-radius: 5px">
+* `#` - starts comment
+* `log` - computes natural logarithm
+* `log10` - computes base 10 logarithm
+* `sin` - computs trigonometric function sinus
+* `&` - Logical operator _and_
+* `|` - Logical operator _or_
+* `!` - Logical operator _not_
+* `curve` - draws a curve corresponding to a function over the interval
+* `paste` - concatenate vectors after converting to character
+* `print` - prints its argument
+* `help` - alternatively `?' returns help on specified topic
+* `typeof` - determines the type or storage mode of an object
+* `ls` - list the names of the objects
+* `rm` - remove objects
+* `abs` - computes the absolute value
+* `:` - colon operator, generates regular sequences
+* `seq` - generates regular sequences
+* `c` - combine Values into a Vector or List
+* `logical` - creates object of type "logical"
+* `numeric` - creates object of type "numeric"
+* `character` - creates object of type "character"
+* `rep` - replicates the values
+* `matrix` - creates a matrix from the given set of values
+* `dim` - retrieve or set the dimension of an objec
+* `nrow` - number of rows present in an object
+* `ncol` - number of columns present in an object
+* `det` - calculates the determinant of a matrix
+* `solve` - solves the equation a %*% x = b, where b can be either a vector or a matrix.
+* `list` - creates a list
+* `unlist` - simplifies list to a vector
+* `$` - dolar operator, extracts or replaces parts of anoObject
+* `[]` - square brackets or index operator, extracts or replaces parts of an object
+* `data.frame` - creates data frame object
+* `read.table` - reads a file in table format and creates a data frame from it
+* `write.table` - writes data frame as a file in table format
+* `class` - returns name of the _class_ of the object
+* `as.<somthing>` - Attempts to convert objest of one type (or class) into another \<somthing\>, e.g.:
+* `as.matrix` - Attempts to convert its argument into a matrix
+* `str` - Display the structure of R object
+* `head` - Returns first part of an object, e.g. first rows of a data frame
+* `tail` - Returns last part of an object, e.g. last rows of a data frame
+* `mean` - Calculates arythmentc mean
+* `sd` -  Calculates standard deviation
+* `summary` - Returns summaries of the results of various model fitting functions, e.g. mean, meadian, min, max
+* `levels` - Returns levels of a factor variable
+* `unique` - Extracts unique elements from vector, matrix, data frame, etc
+* `for` - for loop
+* `print` - Prints its argument
+* `paste` - Concatenate vectors after converting to character
+* `plot` - Create a X-Y plot
+* `legend` - Adds legend to plot
+</div>
+------------------
+
+<span class="slides">slides 1-14</span>
+
+# Introduction
+
+
+## What is R?
+<font size="+1">**R**</font> is an open source programming language and software environment for statistical computing and graphics that is supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software and data analysis. 
+
+R and its libraries implement a wide variety of statistical and graphical techniques, including linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, and others.  
+
+R is easily extendable through functions and modules, and the R community is noted for its active contributions in terms of packages.  
+
+Many of R's standard functions are written in R itself, which makes it easy for users to follow the algorithmic choices made. For computationally intensive tasks, C, C++, and Fortran code can be linked and called at run-time (quoted from [R - programming language](https://en.wikipedia.org/wiki/R_(programming_language))). You can download and install R from [here](https://cran.rstudio.com/).
+
+
+## What is RStudio?
+R Studio (written as RStudio without the space) is a free and open-source Integrated Development Environment (IDE) for R. You can download RStudio from [here](https://www.rstudio.com/products/rstudio/download/#download). RStudio makes our expirience with R easier, but it is not necessary to program in R.
+
+
+## First steps
+
+### Calculator
+Almost all introductory R courses begin from using R as a calculator... We will do the same. Let's type the formulas (expressions) below and click \<Ctrl-ENTER\> on PC or \<Cmd-ENTER\> on Mac.
+```{r}
+#now, we use R as a calculator (order of operators is: (), ^, /, *, +, -):
+2 + 2
+
+#we can force the order using parenthesises
+3 + 5 * 2 ^ 2
+(1 + 2) * 3
+
+#or use scientific notation
+2e-4 + 1e-6
+```
+
+We can use bulit-in functions
+```{r}
+log(1)
+log10(100)
+sin(1)
+sin(pi)
+```
+
+Our R-calculator can plot!
+```{r}
+curve(sin, from = 0, to = 2 * pi, n = 100)
+
+#we can use more complicated expression which uses 'x' as a variable
+curve(x^2 * log(x) * sin(x), from = 0, to = 2 * pi, n = 100)
+```
+
+R can also work with text
+```{r}
+#output text
+"Hello World!"
+
+#use bulit-in function print() to print:
+print("Hello World!")
+
+#concatenate parts to get one string of text:
+print(paste("Answer to", "the Ultimate Question of Life, the Universe, and Everything is", 2^5 + 2^3 + 2^1))
+```
+
+
+### Comment
+Have you noticed the code lines starting from the `#` symbol? They are there to comment and explain the code. Comment is an important part of any programming language. In R any line, or part of starting with `#` symbol is treated as a comment and not interpreted.
+It is a good coding practice to include at the beginning of the code some information about what is the code for, how to use it and who and when wrote it.
+```{r}
+######################################################################
+#                                                                    #
+#   ***     Introduction to R and RStudio, Programming in R     ***  #
+#                                                                    #
+#   workshop on 26 - 27 November 2019                                #
+#                                                                    #
+#                                                                    #
+#                                            marcin.adamski@anu.edu.au
+######################################################################
+```
+
+### HELP!!!
+How to get help in R:
+
+https://www.r-project.org/help.html
+
+
+* use function ```help()```
+```{r, eval=F}
+help("print")
+```
+
+* instead of ```help()``` you can use ```?``` shortcut
+```{r, eval=F}
+? print
+```
+
+* or use ```??``` to search the help topics
+```{r, eval=F}
+??print
+```
+<br>
+
+<span class="slides">slides 15-19</span>
+
+## Variables and data types
+
+We have already mentioned variables. Now, we will have a closer look at them and the **assignments**.
+
+We can assign numerical values or results of numerical operations:
+```{r}
+x <- 1 / 10   #'<-' is an assignment operator; you can enter it with one keystroke as Alt + _ (underscore)
+x
+x <- 1000   #notice how RStudio updates its description of x on the top right 'Environment' tab
+x < - 10    # ***** BE CAREFUL WITH SPACES!!!! *****
+x
+log10(x)
+2 * x
+
+isGood    = TRUE
+myNumber  = 0.25
+myInteger = 2L
+myComplex = 3 + 2i
+myName    = "Marcin"
+```
+
+To check type of the data use the ```typeof()``` function
+```{r}
+typeof(isGood)
+typeof(myNumber)
+typeof(myComplex)
+typeof(myName)
+```
+
+Not all names of variables are equally good. Variable names can contain letters (upper and lower), numbers (but they can't start with a digit), underscores, 
+and dots (but if they start from a dot they are 'hidden')
+```{r, eval=F}
+#examples of bad variable names
+12_from_the_left <- 12     #starting with a number
+my name <- "Marcin"        #contains space
+me@home <- 2               #contains non-alphanumeric symbol
+```
+
+Actually variable names may breake the rules and start with digits and contains spaces if they are enclosed in back-tick marks ``` `` ```. E.g.
+```{r}
+#examples of bad variable names
+`12_from_the_left` <- 12     #starting with a number
+`my name` <- "Marcin"        #contains space
+`me@home` <- 2               #contains non-alphanumeric symbol
+print(`12_from_the_left`)
+print(`my name`)
+print(`me@home`)
+```
+> Please do us all the favor and do not use the back-tick trick in your code.
+
+<br>
+We have learnt that a variable is created when a value is assigned to if for the first time. \
+But how to list all the variables? And how to delete them?  \
+To list variables we use the list functions `ls()` (or we can consult the **Environment** panel in RStudio).
+```{r}
+ls()
+
+```
+
+To remove a variable we use remove function `rm()` (or use the _broom_ icon in the **Environment** panel in RStudio).
+```{r}
+rm(myName)
+
+#to remove all variables we use
+rm(list = ls())
+```
+
+Do you know how the `rm(list = ls())` actually worked?  
+How to delete a set of variables using one rm() function?
+
+<br>
+
+<span class="slides">slides 20-23</span>
+
+## Relational Operators
+Relational operators are used to compare objects, e.g. variables, numbers. The result is a logical value - `TRUE` or `FALSE`.
+```{r}
+1 == 1   #please note the doube '='
+1 == 0
+1 < 0
+1 >= 0
+1.2 == 1.2
+```
+
+Why we should **never** use ```==``` to compare floating-point numbers:
+```{r}
+#often it works... but we may run into problems with float type numbers:
+3 / 10 == 0.3
+3 * 0.1 == 0.3
+
+#we need to be more creative with floating points:
+abs(3 * 0.1 - 0.3) <= 1e-9 #less than some small, acceptable error
+```
+>When checking if two floating-points numbers are equal we have to always allow for a small error
+
+## Logical operators
+
+Logical operators are used to carry out Boolean operations like `AND`, `OR`, `NOT`.
+
+<table align="center" border="1" cellpadding="50">
+<caption>`OR` operator, symbol `|`</caption>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>A | B</th>
+</tr>
+<tr>
+<td>`FALSE`</td>
+<td>`FALSE`</td>
+<td>`FALSE`</td>
+</tr>
+<tr>
+<td>`FALSE`</td>
+<td>`TRUE`</td>
+<td>`TRUE`</td>
+</tr>
+<tr>
+<td>`TRUE`</td>
+<td>`FALSE`</td>
+<td>`TRUE`</td>
+</tr>
+<td>`TRUE`</td>
+<td>`TRUE`</td>
+<td>`TRUE`</td>
+</tr>
+</table>
+<br>
+
+<table align="center" border="1" cellpadding="50">
+<caption>`AND` operator, symbol `&`</caption>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>A & B</th>
+</tr>
+<tr>
+<td>`FALSE`</td>
+<td>`FALSE`</td>
+<td>`FALSE`</td>
+</tr>
+<tr>
+<td>`FALSE`</td>
+<td>`TRUE`</td>
+<td>`FALSE`</td>
+</tr>
+<tr>
+<td>`TRUE`</td>
+<td>`FALSE`</td>
+<td>`FALSE`</td>
+</tr>
+<td>`TRUE`</td>
+<td>`TRUE`</td>
+<td>`TRUE`</td>
+</tr>
+</table>
+<br>
+
+<table align="center" border="1" cellpadding="50">
+<caption>`NOT` operator, symbol `!`</caption>
+<tr>
+<th>A</th>
+<th>!A</th>
+</tr>
+<tr>
+<td>`FALSE`</td>
+<td>`TRUE`</td>
+</tr>
+<tr>
+<td>`TRUE`</td>
+<td>`FALSE`</td>
+</tr>
+</table>
+<br>
+Let's give the logical opeartors a try:
+```{r}
+1 > 0
+1 > 2
+
+1 > 0 | 1 > 2
+1 > 0 & 1 > 2
+!(1 > 0)
+```
+
+##Operator Precedence and Associativity
+
+As we all remember from our preschool algebra classes operators have their 'priority' or _precedence_ - the order in which they are used in calculations. The table below is a short summary of precedencing order of the more common operators in R.
+
+> It's always possible to force the precedence with the parentheses: `(` `)`
+
+<table align="center" border="1" cellpadding="50">
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>Associativity</th>
+</tr>
+<tr>
+<td>^, **</td>
+<td>Exponent</td>
+<td>Right to Left</td>
+</tr>
+<tr>
+<td>-x, +x</td>
+<td>Unary minus, Unary plus</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>:</td>
+<td>sequence</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>%_any_%</td>
+<td>_special_ operators, e.g. %in%, %*%</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>*, /</td>
+<td>Multiplication, Division</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>+, &#8211;</td>
+<td>Addition, Subtraction</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>&lt;, &gt;, &lt;=, &gt;=, ==, !=</td>
+<td>Comparisions</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>!</td>
+<td>Logical NOT</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>Logical AND</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>|</td>
+<td>Logical OR</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>-&gt;, -&gt;&gt;</td>
+<td>Rightward assignment</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td>&lt;-, &lt;&lt;-</td>
+<td>Leftward assignment</td>
+<td>Right to Left</td>
+</tr>
+<tr>
+<td>=</td>
+<td>Leftward assignment</td>
+<td>Right to Left</td>
+</tr>
+</table>
+
+## Data structures
+
+<br>
+<span class="slides">slides 24-26</span>
+
+### Vectors
+
+When we perform an operation on a number (or text) we actually do not perform it an a single value (called **_scalar_** in computer jargon). We perform it on a sequence of values (called **_vector_**). Scalar is a single element or value; scalar can not ever _expand_ to more than one value. Vector (called _atomic vector_) is the simplest data structure in R and can store one or more elements or values of the same type.  
+So far we were using vectors containing just one element.  
+
+When we type:
+```{r}
+v <- 11
+v
+```
+We created a vector with a single element, 11. **there are no scalars in R**. How to create a vector with more than one element?
+
+$$
+v = \begin{pmatrix}1, 2, 3, 4, 5, 6, 7, 8, 9, ..., 121\end{pmatrix}
+$$
+Or a vector with several character elements?
+$$
+v = \begin{pmatrix}"one", "two", "three", "last"\end{pmatrix}
+$$
+
+There is more than one way:
+<br>
+The colon `:` **sequence operator**:
+```{r}
+#create vector from sequence of numbers, e.g. from 11 to 121
+v <- 1:121
+v
+
+#or from 121 to 1
+v <- 121:1
+v
+```
+
+The **sequence function** `seq()` to create a sequence:
+```{r}
+#when we need the 'step' between consecutive elements to be different than 1 (or -1), e.g. 2
+v <- seq(from = 1, to = 121, by = 2)
+v
+
+```
+
+The **type function** to create an _empty_ vector of given type and size:
+```{r}
+logical(5)     #logical vector of length 5 (containing falses)
+numeric(5)     #numeric vector of length 5 (containing zeros)
+character(5)   #character vector of length 5 (containing empty strings)
+```
+
+The **replicate function** `rep()` to _replicate_ given object specified number of times:
+```{r}
+rep(TRUE, 5)       #logical vector containing 5 trues
+rep(42, 6)         #numeric vector containing 6 21s
+rep('r rocks', 3)  #character vector containing 3 strings 'r rocks'
+```
+
+
+The **combine function** `c()` to create a vector of manually entered values:
+```{r}
+v <- c(1, 3, 7, -1)
+v
+
+#What data type is the vector of?
+typeof(v)
+
+#BTW, using c() we can create a vector of characters
+v <- c('one', 'two', 'last')
+v
+```
+
+Vector is a **_homogeneous_** data structure meaning it can contain only elements of the same type (e.g. only numbers, or only character).  
+What will happen if we create a following vector:
+```{r}
+v <- c(1, 3, 4, 5, 6, 'last')
+v
+#check the data type:
+typeof(v)
+```
+What has happened is called **type coercion** - the variable's data type was _coerced_ to the type suitable to store all the types of enetered elements.
+
+### Vectorization
+
+Vectorization means that when an operation is performed on a vector it involves all elements in that vector (not e.g. only the first element). All R functions (and operators) are _vectorized_ - they operate on vectors. ***In R there are no scalars - only vectors***.
+```{r}
+#lets first check simple arithmetic operators:
+a <- 1:6
+b <- 3:8
+a
+b
+a + b
+a * b
+```
+
+So, how to multiply a multi-element vector by a single-element vector representing scalar?:
+```{r}
+a <- 2
+b <- 3:8
+a
+b
+```
+
+What will happen and why?
+```{r}
+a * b
+```
+What actually happened is: The shorter vector _a_ was _recycled_ as many times as necessary to match length of the longer vector _b_. As _a_ has only 1 element it was an equivalent of multiplying _b_ by scalar _a_.
+
+
+### Matrices
+
+Now, lets quickly introduce a matrix. \
+Matrix is a collection of elements arranged in a 2D rectangular layout. It is a vector where each element is a vector of the same length. All the matrix elements must be the same type (e.g. all numbers or all text, same as with vectors). In most cases, to be able to use **_matrix algebra_** we will use numeric matrices.  \
+To create a matrix in R we can use the function `matrix()`. The matrix function needs to know:
+
+* Shape of the matrix - number of rows and columns.
+* Value of the elements - a vector with as many elements as there are _cells_ in the matrix.
+* Filling order - how to fill the matrix with the elements, by columns or by rows.
+
+Lets create a 4x3 matrix variable called _M_ filled with integer numbers from 1 to 12:
+
+$$
+M = \begin{pmatrix}1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ 9 & 10 & 11 & 12\end{pmatrix}
+$$
+```{r}
+M <- matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE)
+M
+```
+
+We can check data type of a matrix. And check its dimensions with functions `dim()`, `nrow()`, and `ncol()`.
+
+```{r}
+typeof(M)
+
+#chech the size of the matrix:
+dim(M)   # rows and columns
+nrow(M)  # only rows
+ncol(M)  # only columns
+```
+
+
+Let's have an excercise doing some matrix algebra: \
+Define matrices`A` and `B`:
+$$
+A = \begin{pmatrix}4 & 5 \\ 2 & 3\end{pmatrix},\quad
+B = \begin{pmatrix}1/2 & 1 \\ -2 & -1\end{pmatrix}
+$$
+
+```{r}
+#define the matrices:
+A <- matrix(c(4, 5, 2, 3), nrow = 2, ncol = 2, byrow = TRUE)
+B <- matrix(c(0.5, 1, -2, -1), nrow = 2, ncol = 2, byrow = TRUE)
+A
+B
+```
+
+(i) Find _A_ + 2*B* and _A_^2^
+```{r}
+#A + 2B:
+A + 2 * B
+
+#A square
+A %*% A
+```
+
+(ii) Find _AB_, _BA_, det _A_, det _B_, det(_AB_) and det(_BA_)
+```{r}
+#AB
+A %*% B
+
+#BA
+B %*% A
+
+#det A, det B
+det(A)
+det(B)
+
+#det AB, det BA
+det(A %*% B)
+det(B %*% A)
+```
+
+(iii) Find _A_^-1^ and _B_^-1^, check that det(_A_^-1^) = (det _A_)^-1^ and det(_B_^-1^) = (det _B_)^-1^
+```{r}
+#inverse A and B
+solve(A)
+solve(B)
+
+#check that determinant from inversed matrix equals inverse of the determinant
+1 / det(A)
+det(solve(A))
+
+1 / det(A) == det(solve(A))
+
+```
+Why the last comparison above returned FALSE?
+How to perform that comparison correctly?
+
+(iv) Check that (AB)^-1^ = B^-1^ A^-1^
+```{r}
+
+C <- solve(A %*% B)
+D <- solve(B) %*% solve(A)
+
+#How to check if two matrices are equal?
+#we should never directly '==' two float point numbers! 
+#instead check if the difference between them is small enough:
+abs(C - D) < .Machine$double.eps
+all(abs(C - D) < .Machine$double.eps)
+
+```
+
+###Vector and Matrix Indexing
+
+<br>
+<span class="slides">slides 27-40</span>
+
+Now we know (sort of) how to perform operation of vectors, matrices and data.frames. But how to access specific elements in vectors or rows or columns of data in data frames? Rephrasing: How to **subset** a data structure?  
+
+Subsetting is done with use of indices. To access _n^th^_ element of a vector _v_ we use notation: _v_[_n_]. `[ ]` is the _indexing operator_.
+```{r}
+v <- 1:10
+v
+#get 1st element
+v[1]
+#get 7th element
+v[7]
+
+#get elements from 3 to 6
+v[3:6]
+
+#how to get elements 2, 4, 5?
+```
+
+Similarly we index elements of a matrix, only this time we use two indices - first for the row, and second for the column.
+Lets get back to our _M_ matrix
+
+$$
+M = \begin{pmatrix}1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ 9 & 10 & 11 & 12\end{pmatrix}
+$$
+
+```{r}
+M <- matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE)
+M
+
+#get element in second row, third column
+M[2, 3]
+
+#to get all elements from a row or a column simply ommit row or column index:
+M[2, ]    #returns second row as a vector
+M[, 3]    #return thirdcolumn as a vector
+```
+
+An excercise: Write indexing statement which will subset the _M_ matrix and return its bottom right corner:
+$$
+\begin{pmatrix}7 & 8 \\ 11 & 12\end{pmatrix}
+$$
+
+
+### Lists
+
+<br>
+<span class="slides">slides 41-55</span>
+
+> Now we will focus on lists and data frames - the heterogenous counterparts of vectors and matrices.
+
+List can be seen as a heterogeneous equivalent of vector. It can be created using function `list()`.
+```{r}
+l <- list(1, 2, 3, "last")
+l
+```
+
+To access elements of a list we use indexing in the same way as we did with vectors.
+```{r}
+#get second element
+l[2]
+
+#why so many square brackets?
+typeof(l[2])
+
+```
+
+Indexed element of list is a list (it's not such a surprise, as an element of a vector is a vector of length 1). \
+To accesss the element itself we need to 'unlist' it with function `unlist()`:
+
+```{r}
+unlist(l[2])
+```
+
+Or use the `[[ ]]` operator:
+```{r}
+l[[2]]
+```
+
+As an exercise we will create a list _l_ with 3 elements, each being a vector of the same length (a list of vectors). \
+First, we create the three vector variables (content doesn't matter):
+```{r}
+#create the three vectors
+v1 <- 1:4
+v2 <- c(NA, NA, "c", "d") #NAs to mark that we are missing the first two elements in this vector
+v3 <- 3:6
+```
+
+Now, we use the function list() to build a list with the vectors as the elements.
+```{r}
+#and now the list og vectors:
+l <- list(v1, v2, v3)
+l
+```
+
+The list have two dimensions: First is the list (elemnt 1, 2, 3), second is the element within each vector.  \
+To access e.g. 3^rd^ element in the vector being the 2^nd^ element of the list _l_ we will need two indexes: First for the list, second for the element within the lists element (in the vector):
+```{r}
+l[[2]][3]
+```
+> Note that the list index uses the unlisting [[]] operator
+
+### Named lists
+The list elements may have their names to allow refering to them by their names rather than indexes.  \
+Lets create a list as above but this time we will name the three vector elements:
+```{r}
+l.named <- list(ord = v1, symbol = v2, value = v3)
+l
+l.named
+```
+
+The named elements allow to reformulate question "How to access 3^rd^ element in the vector which is the 2^nd^ element of the list _l_?" \
+Into: How to access 3nd element in the vector which has name _symbol_ in the the list _l_ ? \
+To use name of an element we will need the `$` operator:
+```{r}
+#first, let access the 'symbol' element:
+l.named$symbol
+
+#have you noticed that the value was already unlisted?
+#meaning we can do this:
+l.named$symbol[3]
+
+```
+
+> It is of course still possible to refer to elements in named lists using the index notation.
+
+### Data frames
+
+Data frames are heterogeneous equivalents of matrices (heterogeneous means they can store data of various types): Each column can be of different data type, but within each column, all rows must be of the same data type. A bit like a simple spreadsheet (e.g. in Excel) or the _list of vectors_ example above. Data frames are the basic, most comonly used data structures for storing and analyzing the experimental data.  \
+Let's create a data frame with data as in the table (or a spreadsheet) below:
+
+<br>
+<table align="center" border="1" cellpadding="50">
+<tr>
+  <th>animal</th><th>feel</th><th>weight</th>
+</tr>
+<tr>
+  <td>dog</td><td>furry</td><td style="text-align:right">22</td>
+</tr>
+<tr>
+  <td>cat</td><td>furry</td><td style="text-align:right">4</td>
+</tr>
+<tr>
+  <td>sea cucumber</td><td>squishy</td><td style="text-align:right">1.1</td>
+</tr>
+<tr>
+  <td>sea urchin</td><td>spiny</td><td style="text-align:right">0.5</td>
+</tr>
+</table>
+<br>
+
+To create a data frame we use a function called... `data.frame()`.  \
+We need to specify each column as a separate vector. All the vectores (columns) **must** have the same number of elements (rows):
+```{r}
+animals <- data.frame(animal = c("dog",   "cat",   "sea cucumber", "sea urchin"),
+                        feel = c("furry", "furry", "squishy",      "spiny"),
+                      weight = c(45,      8,       1.1,            0.8)
+)
+
+animals
+```
+
+Now, when we have our data in the `data.frame` structure we can save it as a file. \
+R can work with many data file formats but the most popular ones are text files with fields separated either by a \<TAB\> or ',' (coma). Those formats are know as 'tab-separated values' (TSV) and 'coma-separated values' (CSV).
+To save our `data.frame` as a file we can use the function `write.table()`.
+
+> basic arguments to specify when writing a data.frame as a file
+>
+> * file - name of the file
+> * sep  - character to use as a separator, \t is tabulator
+> * col.names - save column names?
+> * row.names - save row names?
+> * quote - surround non-numeric values in double-quotes?
+
+```{r}
+write.table(animals, file = "animals.tsv", sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
+```
+
+Having the file created, we can now read it from a file to a `data.frame` with function `read.table()`
+```{r}
+animals <- read.table(file = "animals.tsv", sep = "\t", header = TRUE)
+```
+
+Data frame and matrix can be converted into each other with functions `as.matrix()`, to convert `data.frame` into `matrix` or `as.data.frame()` to do the oposite.  \
+
+
+> Remember that `data.frame` is **heterogeneous** but `matrix` is **homogenous**. Conversion of `data.frame` into `matrix` **may result in type coercion**.
+
+
+```{r}
+#data frame animals;
+animals
+
+#convert to matrix creatig matrix variable named 'animals.mx':
+animals.mx <- as.matrix(animals)
+animals.mx
+```
+
+Note that the data type of matrix _animals.mx_ was coerced to character.
+```{r}
+#check data type
+typeof(animals.mx)
+```
+
+
+## Type and class conversions:
+
+Objects of different type (or class) can be converted into each other using the as.\<something\>() functions (e.g. the `as.matrix()` above). Object can also by queried if they are of spefic type/class using the is.\<something\>() functions (e.g. `is.matrix()` or `is.integer()`).  \
+<br>
+Conversions to character (anything can be converted to character with more or less sens):
+```{r}
+as.character(1e2)
+as.character(TRUE)
+
+#converting to character with formating
+sprintf("%10.2e %s", 1024 * 10, "BUM!")
+```
+
+Conversions between integer and double:
+```{r}
+as.integer(2.7)             #will cutoff the decimal part!
+as.integer(round(2.7, 0))   #use thr round function first
+as.double("3.14159265")     #we can convert from characted too
+```
+remember to use the `as.integer()` function not just `integer()`:
+```{r}
+integer(2.7)
+double("10.16")
+# the functions above create vectors of given type with given number of elements, not convert between types!!!
+```
+
+Conversions between vector and list:
+```{r}
+x <- c(first = 1, second = 2, third = 3)
+class(x)
+print(x)
+x.ls <- as.list(x)
+class(x.ls)
+print(x.ls)
+x.ls.v <- as.vector(x.ls)   #doesn't work as expected! output is still a list
+class(x.ls.v)
+x.ls.v <- unlist(x.ls)      #we need to use unlist() instead (as.vector only strips the attributes)
+class(x.ls.v)
+print(x.ls.v)
+attributes(as.vector(x.ls))
+```
+
+Conversions between matrix and data.frame:
+```{r}
+x <- matrix(1:6, ncol = 2, dimnames = list(LETTERS[1:3], letters[24:25]))
+class(x)
+print(x)
+
+x.df <- as.data.frame(x)
+class(x.df)
+print(x.df)
+x.df.mx <- as.matrix(x.df)
+class(x.df.mx)
+print(x.df.mx)
+```
+<br>
+
+# Working with data, The Gapminder Example
+Gapminder Foundation is a non-profit venture, that promotes sustainable global development and achievement of the United Nations Millennium Development Goals by increased use and understanding of statistics and other information about social, economic and environmental development at local, national and global levels. The data used here is an excerpt of the data available at http://gapminder.org:  \
+For each of the 142 countries on 5 continents provides values for:
+
+* life expectancy, 
+* GDP per capita, 
+* population
+
+The data was collected every 5 years from year 1952 to 2007.
+
+## Exercise 1: Get the data
+1. Download the gapminder.tsv data file from http://leucon.anu.edu.au/marcin/r_data/gapminder.tsv    
+2. Save the file into your project's directory.
+3. Open the gapminder.tsv file in RStudio editor.
+4. Identify column separator (is it tabulator or ','?).
+5. Read data from gapminder.tsv into data frame variable `gapminder`, use `read.table` function
+
+```{r, echo=T}
+gapminder <- read.table("gapminder.tsv", header = TRUE, sep = "\t")
+```
+
+## Exercise 2: Check the data
+1. View data in `gapminder` using RStudion Data Viewer.
+```{r, echo=F, results='asis'}
+knitr::kable(head(gapminder))
+```
+
+2. Analyze structure of `gapminder` in RStudion Environment panel and using function `str`.
+```{r, echo=T}
+str(gapminder)
+```
+
+3. Print out a few first and last rows of `gapminder` with functions `head` and `tail`.
+```{r, echo=T}
+head(gapminder, n = 3)
+tail(gapminder, n = 3)
+```
+
+4. Explore the data with basic statistics: Calculate mean and standard deviation for columns (variables) `lifeExp` and `gdpPercap`; use functions `summary`, `mean`, `sd`.
+
+>Hint: Access columns with `$` operator.
+
+```{r, echo=T}
+#basic stats for variable lifeExp
+mean(gapminder$lifeExp)
+sd(gapminder$lifeExp)
+summary(gapminder$lifeExp)
+
+#basic stats for variable gdpPercap
+mean(gapminder$gdpPercap)
+sd(gapminder$gdpPercap)
+summary(gapminder$gdpPercap)
+```
+
+## Exercise 3: Calculate and print mean `lifeExp` for continent 'Oceania' in 21st century.
+1. Select rows where column `continent` equals to 'Oceania'. Use indexing with logical expression and the subsetting operator `$`.
+```{r, echo=T}
+#using function head to limit printout
+head(gapminder[gapminder$continent == 'Oceania', ])
+```
+
+2. Similarly select rows where column `year` is greater or equal 2000 (21 century).
+```{r, echo=T}
+#using function head to limit printout
+head(gapminder[gapminder$year >= 2000, ])
+```
+
+3. Select rows meeting both conditions, use _and_ operator `&`
+```{r, echo=T}
+#using function head to limit printout
+head(gapminder[gapminder$continent == 'Oceania' & gapminder$year >= 2000, ])
+```
+
+4. Select column `lifeExp`. Use indexing (columns indexing) with names
+```{r, echo=T}
+#using function head to limit printout
+head(gapminder[gapminder$continent == 'Oceania' & gapminder$year >= 2000, "lifeExp"])
+```
+
+5. Calculate mean with function `mean`
+```{r, echo=T}
+mean(gapminder[gapminder$continent == 'Oceania' & gapminder$year >= 2000, "lifeExp"])
+```
+
+## Exercise 4: Subset `gapminder` data frame to get data only for Australia. Write the filtered data to a text TSV (tab-separated values) file called 'data_au.tsv'.
+
+1. Select data for Australia. Use logical expression and indexing, select rows for Australia and all columns. Assign the resulting data frame to a new variable `data.au`
+```{r, echo=T}
+data.au <- gapminder[gapminder$country == 'Australia', ]
+```
+
+2. Write data frame `data.au` to file 'data_au.tsv'.
+```{r, echo=T}
+write.table(data.au, "data_au.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+```
+
+## Exercise 5: Create a plot of GDP per capita vs. life expectancy.
+
+> Use functions `plot()` and `legend()`.
+
+1. Try function `plot()` with just two argumnets `x` and `y`.
+```{r, echo=T}
+plot(gapminder$gdpPercap, gapminder$lifeExp)
+```
+
+2. Add colors by factors with argument `col` (color by continent)
+```{r, echo=T}
+gapminder <- read.table("gapminder.tsv", header = TRUE, sep = "\t")
+plot(gapminder$gdpPercap, gapminder$lifeExp, col = gapminder$continent)
+```
+
+3. Add titles for the axes with arguments `xlab` and `ylab`, change shape of the symbols with argument `pch` (try different values).
+```{r, echo=T}
+plot(gapminder$gdpPercap, gapminder$lifeExp, col = gapminder$continent, pch = 20, xlab = "GDP per capita", ylab = "life expectancy")
+```
+
+4. Add legend with function `legend`.
+```{r, echo=T}
+plot(gapminder$gdpPercap, gapminder$lifeExp, col = gapminder$continent, pch = 20, xlab = "GDP per capita", ylab = "life expectancy"); legend('topright', legend = levels(gapminder$continent), col = 1:length(gapminder$continent), cex = 0.8, pch = 20)
+```
+
+5. Make histrogram of life expectancy in year 2002 in Afrika and in Europe
+```{r, echo=T}
+par(mfrow=c(2,1))
+hist(gapminder[gapminder$year == 2002 & gapminder$continent == "Africa", ]$lifeExp, freq = F, col = "light green", xlab = "years", main = "Life expectancy in Afrika in Year 2002", breaks = 10, right = F)
+hist(gapminder[gapminder$year == 2002 & gapminder$continent == "Europe", ]$lifeExp, freq = F, col = "light blue", xlab = "years", main = "Life expectancy in Europe in Year 2002", breaks = 10, right = F)
+```
+
+
+<div class="footer"><br>END of Day 1/2 of Introduction to R and RStudio, Programming in R</div>
