@@ -1,8 +1,8 @@
 ---
-title: "<div class='row'><div class='column left'>Introduction to R and RStudio<br>Day 1<br><span style='font-family:Verdana;font-size:50%'>RSB-CBBU Workshop for Students and Staff<br> https://github.com/numicator/ANU_R_workshop</span></div><div class='column right'>![](anu_logo.png)</div></div>"
+title: "<div class='row'><div class='column left'>Introduction to R and RStudio<br>Day 1<br><span style='font-family:Verdana;font-size:50%'>JCSMR Workshop for Students <br> https://github.com/numicator/ANU_R_workshop</span></div><div class='column right'>![](anu_logo.png)</div></div>"
 
 author: "Marcin Adamski"
-date: "26-27 November 2019"
+date: "17-18 February 2020"
 output:
   html_document:
     toc: yes
@@ -258,7 +258,7 @@ It is a good coding practice to include at the beginning of the code some inform
 #                                                                    #
 #   ***     Introduction to R and RStudio, Programming in R     ***  #
 #                                                                    #
-#   workshop on 26 - 27 November 2019                                #
+#   workshop on 17 - 18 February 2020                                #
 #                                                                    #
 #                                                                    #
 #                                            marcin.adamski@anu.edu.au
